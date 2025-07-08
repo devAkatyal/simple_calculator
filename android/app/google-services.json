@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "510154005717",
+    "project_id": "simple-calculator-99d7f",
+    "storage_bucket": "simple-calculator-99d7f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510154005717:android:9e94807ce89fe5fb0c165c",
+        "android_client_info": {
+          "package_name": "com.stairlabs.simple_calculator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1NZQqdy_yvttLTFWM-A1G6CgyCwPfzZ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

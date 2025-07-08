@@ -1,0 +1,137 @@
+{
+  "uiArchitecture": {
+    "screenLayout": {
+      "name": "mainScreen",
+      "purpose": "Root layout container for the entire calculator UI.",
+      "sizing": {
+        "strategy": "Fills available screen space, managed by Scaffold and SafeArea."
+      },
+      "children": [
+        "themeSwitcherContainer",
+        "displayContainer",
+        "keypadContainer"
+      ]
+    },
+    "containers": [
+      {
+        "name": "themeSwitcherContainer",
+        "purpose": "Houses the theme-switching button, positioned at the top.",
+        "sizing": {
+          "strategy": "Auto",
+          "value": "Takes the minimum vertical space required by its child."
+        },
+        "children": ["themeSwitcherButton"]
+      },
+      {
+        "name": "displayContainer",
+        "purpose": "Houses the equation and result text fields. Occupies the top portion of the screen.",
+        "sizing": {
+          "strategy": "Flexible ratio",
+          "value": "3.fr"
+        },
+        "children": ["equationText", "resultText"]
+      },
+      {
+        "name": "keypadContainer",
+        "purpose": "Houses the grid of calculator buttons. Occupies the bottom portion of the screen.",
+        "sizing": {
+          "strategy": "Flexible ratio",
+          "value": "7.fr"
+        },
+        "children": ["keypadGrid"]
+      }
+    ],
+    "components": {
+      "global": [
+        {
+          "name": "themeSwitcherButton",
+          "purpose": "Allows user to toggle between light and dark themes. Icon is reactive.",
+          "implementationNote": "Uses Obx to react to state changes in ThemeController."
+        }
+      ],
+      "display": [
+        {
+          "name": "equationText",
+          "purpose": "Displays the user-entered mathematical expression.",
+          "implementationNote": "Reactive text field bound to 'equation' in HomeController."
+        },
+        {
+          "name": "resultText",
+          "purpose": "Displays the final calculated result or current number entry.",
+          "implementationNote": "Reactive text field bound to 'result' in HomeController. Formats result to trim trailing '.0'."
+        }
+      ],
+      "keypad": {
+        "name": "keypadGrid",
+        "purpose": "The main grid containing all interactive buttons.",
+        "layout": "4 columns, 5 rows, equal flexible widths and heights (1.fr).",
+        "implementationNote": "Each button is an instance of the custom 'CalculatorButton' widget, which includes a press-and-release animation.",
+        "children": [
+          { "id": "buttonClear", "label": "C", "action": "onButtonPressed('C')" },
+          { "id": "buttonPercent", "label": "%", "action": "onButtonPressed('%')" },
+          { "id": "buttonMultiply", "label": "×", "action": "onButtonPressed('×')" },
+          { "id": "buttonDivide", "label": "÷", "action": "onButtonPressed('÷')" },
+          { "id": "button7", "label": "7", "action": "onButtonPressed('7')" },
+          { "id": "button8", "label": "8", "action": "onButtonPressed('8')" },
+          { "id": "button9", "label": "9", "action": "onButtonPressed('9')" },
+          { "id": "buttonAdd", "label": "+", "action": "onButtonPressed('+')" },
+          { "id": "button4", "label": "4", "action": "onButtonPressed('4')" },
+          { "id": "button5", "label": "5", "action": "onButtonPressed('5')" },
+          { "id": "button6", "label": "6", "action": "onButtonPressed('6')" },
+          { "id": "buttonSubtract", "label": "-", "action": "onButtonPressed('-')" },
+          { "id": "button1", "label": "1", "action": "onButtonPressed('1')" },
+          { "id": "button2", "label": "2", "action": "onButtonPressed('2')" },
+          { "id": "button3", "label": "3", "action": "onButtonPressed('3')" },
+          { "id": "buttonEquals", "label": "=", "action": "onButtonPressed('=')" },
+          { "id": "buttonDecimal", "label": ".", "action": "onButtonPressed('.')" },
+          { "id": "button0", "label": "0", "action": "onButtonPressed('0')" },
+          { "id": "buttonBackspace", "label": "⌫", "action": "onButtonPressed('⌫')" }
+        ]
+      }
+    },
+    "spacing": [
+      {
+        "name": "keypadPadding",
+        "value": "24.0 logical pixels on all sides."
+      },
+      {
+        "name": "gapBetweenButtons",
+        "value": "16.0 logical pixels.",
+        "implementationNote": "Managed by 'columnGap' and 'rowGap' of LayoutGrid."
+      },
+      {
+        "name": "themeSwitcherPadding",
+        "value": "16.0 logical pixels on the right."
+      },
+      {
+        "name": "displayInternalSpacing",
+        "value": "8.0 logical pixels.",
+        "implementationNote": "A fixed-size row (8.px) in the display's LayoutGrid between equation and result text."
+      },
+      {
+        "name": "resultTextBottomPadding",
+        "value": "16.0 logical pixels."
+      }
+    ],
+    "theming": {
+      "strategy": "Centralized theme management using GetX and a custom ThemeExtension.",
+      "files": {
+        "app_colors.dart": "Defines all color constants for both light and dark themes.",
+        "app_theme.dart": "Defines ThemeData for both themes and a custom AppThemeExtension for non-standard component colors (e.g., button types).",
+        "theme_controller.dart": "A GetxController that manages the current theme, toggles between modes, and persists the user's choice using 'shared_preferences'."
+      },
+      "font": "Poppins, loaded via the 'google_fonts' package and applied globally in the theme."
+    },
+    "stateManagementAndLogic": {
+      "strategy": "State and business logic are managed by GetX controllers.",
+      "files": {
+        "home_controller.dart": "Manages the calculator's state (equation, result) and handles all button press logic. Uses the 'math_expressions' package for evaluation.",
+        "theme_controller.dart": "Manages UI theme state."
+      }
+    },
+    "debugging": {
+      "recommendation": "A 'debugMode' flag in HomePage can be enabled to render colored borders around major containers and components, verifying layout and spacing.",
+      "implementation": "The '_buildDebugContainer' helper method wraps widgets with a colored border when 'debugMode' is true."
+    }
+  }
+}
