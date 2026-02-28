@@ -256,7 +256,7 @@ class HomePage extends GetView<HomeController> {
             ),
             _buildButton(
               context,
-              text: '+',
+              text: '-',
               col: 3,
               row: 1,
               color: themeExtension.operatorColor,
@@ -287,7 +287,7 @@ class HomePage extends GetView<HomeController> {
             ),
             _buildButton(
               context,
-              text: '-',
+              text: '+',
               col: 3,
               row: 2,
               color: themeExtension.operatorColor,
